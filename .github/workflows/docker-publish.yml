@@ -66,10 +66,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=schedule,suffix=ubuntu18
-            type=ref,event=branch,suffix=ubuntu18
-            type=ref,event=tag,suffix=ubuntu18
-            type=ref,event=pr,suffix=ubuntu18
+            type=schedule,suffix=-ubuntu18
+            type=ref,event=branch,suffix=-ubuntu18
+            type=ref,event=tag,suffix=-ubuntu18
+            type=ref,event=pr,suffix=-ubuntu18
 
 
       # Build and push Docker image with Buildx (don't push on PR)
@@ -146,10 +146,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=schedule,suffix=ubuntu20
-            type=ref,event=branch,suffix=ubuntu20
-            type=ref,event=tag,suffix=ubuntu20
-            type=ref,event=pr,suffix=ubuntu20
+            type=schedule,suffix=-ubuntu20
+            type=ref,event=branch,suffix=-ubuntu20
+            type=ref,event=tag,suffix=-ubuntu20
+            type=ref,event=pr,suffix=-ubuntu20
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -225,10 +225,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=schedule,suffix=ubuntu22
-            type=ref,event=branch,suffix=ubuntu22
-            type=ref,event=tag,suffix=ubuntu22
-            type=ref,event=pr,suffix=ubuntu22
+            type=schedule,suffix=-ubuntu22
+            type=ref,event=branch,suffix=-ubuntu22
+            type=ref,event=tag,suffix=-ubuntu22
+            type=ref,event=pr,suffix=-ubuntu22
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
