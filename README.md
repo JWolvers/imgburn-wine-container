@@ -67,14 +67,14 @@ Here are the main components of this image:
 
 ### Tags
 
-| Tag | Description |
-|-----|-------------|
-| main-ubuntu22 | Automatic build of the main branch (may be unstable) based on ubuntu 22 |
-| main-ubuntu20 | Automatic build of the main branch (may be unstable) based on ubuntu 20 |
-| main-ubuntu18 | Automatic build of the main branch (may be unstable) based on ubuntu 18 **(End of Life - unmaintained)** |
-| v1.x-ubuntu22 | Versioned stable releases based on ubuntu 22 |
-| v1.x-ubuntu20 | Versioned stable releases based on ubuntu 20 |
-| v1.x-ubuntu18 | Versioned stable releases based on ubuntu 18 **(End of Life - unmaintained)** |
+| Tag | Description | Image |
+|-----|-------------|-------|
+| main-ubuntu22 | Automatic build of the main branch (may be unstable) based on ubuntu 22 | ghcr.io/jwolvers/imgburn-wine-container:main-ubuntu22 |
+| main-ubuntu20 | Automatic build of the main branch (may be unstable) based on ubuntu 20 | ghcr.io/jwolvers/imgburn-wine-container:main-ubuntu20 |
+| main-ubuntu18 | Automatic build of the main branch (may be unstable) based on ubuntu 18 **(End of Life - unmaintained)** | ghcr.io/jwolvers/imgburn-wine-container:main-ubuntu18 |
+| v1.x-ubuntu22 | Versioned stable releases based on ubuntu 22 | ghcr.io/jwolvers/imgburn-wine-container:v1.x-ubuntu22 |
+| v1.x-ubuntu20 | Versioned stable releases based on ubuntu 20 | ghcr.io/jwolvers/imgburn-wine-container:v1.x-ubuntu20 |
+| v1.x-ubuntu18 | Versioned stable releases based on ubuntu 18 **(End of Life - unmaintained)** | ghcr.io/jwolvers/imgburn-wine-container:v1.x-ubuntu18 |
 
 ### Platforms
 
