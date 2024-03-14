@@ -32,7 +32,18 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=en_US.UTF-8
 
+RUN \
+    APP_ICON_URL=https://upload.wikimedia.org/wikipedia/en/f/fc/ImgBurn_logo.png && \
+    install_app_icon.sh "$APP_ICON_URL"
+
 EXPOSE 5900
 
 COPY startapp.sh /
 RUN chmod +x /startapp.sh
+
+# Metadata.
+LABEL \
+      org.label-schema.name="ImgBurn" \
+      org.label-schema.description="Docker container for ImgBurn" \
+      org.label-schema.vcs-url="https://github.com/JWolvers/imgburn-wine-container" \
+      org.label-schema.schema-version="1.0"
