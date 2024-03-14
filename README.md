@@ -1,22 +1,21 @@
-![Github License](https://img.shields.io/github/license/JonathanTreffler/backblaze-personal-wine-container?style=flat-square)
-![Docker Pulls](https://img.shields.io/docker/pulls/tessypowder/backblaze-personal-wine?style=flat-square)
-![Docker Image Size](https://img.shields.io/docker/image-size/tessypowder/backblaze-personal-wine/latest?style=flat-square)
+![Github License](https://img.shields.io/github/license/JWolvers/imgburn-wine-container?style=flat-square)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/JWolvers/imgburn-wine-container/total)
 ![Maintenance](https://img.shields.io/maintenance/yes/2024?style=flat-square)
-![GitHub last commit](https://img.shields.io/github/last-commit/JonathanTreffler/backblaze-personal-wine-container?style=flat-square)
-![GitHub contributors](https://img.shields.io/github/contributors/JonathanTreffler/backblaze-personal-wine-container?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/JWolvers/imgburn-wine-container?style=flat-square)
+![GitHub contributors](https://img.shields.io/github/contributors/JWolvers/imgburn-wine-container?style=flat-square)
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://stand-with-ukraine.pp.ua)
 
-# Backblaze Personal Wine Community Container
+# ImgBurn Docker Container
 
-This Docker container runs the Backblaze personal backup client via [WINE](https://www.winehq.org), so that you can back up your files with the separation and portability capabilities of Docker on Linux.
+This Docker container runs ImgBurn via [WINE](https://www.winehq.org), so that you can back up your optical disks with the separation and portability capabilities of Docker on Linux.
 
-It runs the Backblaze client and starts a virtual X server and a VNC server with Web GUI, so that you can interact with it.
+It runs the ImgBurn and starts a virtual X server and a VNC server with Web GUI, so that you can interact with it.
 
-⚠️ This project is not affiliated with Backblaze Inc. ⚠️
+⚠️ This project is not affiliated with ImgBurn ⚠️
 
 ## Table of Content
 
-   * **[Backblaze Personal Wine Container](#backblaze-personal-wine-container)**
+   * **[ImgBurn Docker Container](#ImgBurn-Docker-Container)**
       * [Table of Content](#table-of-content)
       * [Project Status](#project-status)
       * [Docker Images](#docker-images)
@@ -39,11 +38,7 @@ It runs the Backblaze client and starts a virtual X server and a VNC server with
 
 ## Project Status
 
-This project is pretty new, but i would consider it quite stable.
-
-Backing up is tested well, Restoring is not tested very well so far.
-
-Still please be attentive during the install process, because as the docker has read/write access to all the data you want to back up and if you make a grave mistake you could delete stuff.
+This project is a fork of [JonathanTreffler/backblaze-personal-wine-container](https://github.com/JonathanTreffler/backblaze-personal-wine-container), with minimal adjustments to run ImgBurn instead of the Backblaze personal backup client.
 
 ## Docker Images
 ### Content
@@ -57,7 +52,7 @@ Here are the main components of this image:
   * [stunnel], a proxy encrypting arbitrary TCP connections with SSL/TLS.
   * [WINE], a compatibility layer for windows applications on Linux
   * [Winetricks] is a helper script to download and install various redistributable runtime libraries needed to run some programs in Wine
-  * [Backblaze Personal Backup]
+  * [ImgBurn]
 
 [S6-overlay]: https://github.com/just-containers/s6-overlay
 [x11vnc]: http://www.karlrunge.com/x11vnc/
@@ -68,7 +63,7 @@ Here are the main components of this image:
 [stunnel]: https://www.stunnel.org
 [WINE]: https://www.winehq.org/
 [Winetricks]: https://wiki.winehq.org/Winetricks
-[Backblaze Personal Backup]: https://www.backblaze.com/cloud-backup.html
+[ImgBurn]: https://www.imgburn.com/
 
 ### Tags
 
@@ -95,7 +90,7 @@ There are currently no versioned ubuntu22 or ubuntu18 builds.
 | linux/ppc64le | No support |
 | linux/386 | No support |
 
-As Backblaze runs on Windows and MacOS, there is no point in supporting these platforms.
+As ImgBurn only runs on Windows, there is no point in supporting windows platforms.
 
 ## Environment Variables
 
@@ -104,8 +99,6 @@ Environment variables can be set by adding one or more arguments `-e "<VAR>=<VAL
 | Variable       | Description                                  | Default |
 |----------------|----------------------------------------------|---------|
 |`DISABLE_VIRTUAL_DESKTOP` | Disables Wine's Virtual Desktop Mode | false |
-|`DISABLE_AUTOUPDATE` | Disables the auto-update of the backblaze client to the latest known-good version at the time of the docker version release | false |
-|`FORCE_LATEST_UPDATE`| Forces the auto updater to download the newest version of the backblaze client from the backblaze servers instead of a known-good version from the Internet Archive | false |
 |`UMASK`| Mask that controls how file permissions are set for newly created files. The value of the mask is in octal notation.  By default, this variable is not set and the default umask of `022` is used, meaning that newly created files are readable by everyone, but only writable by the owner. See the following online umask calculator: http://wintelguy.com/umask-calc.pl | (unset) |
 |`TZ`| [TimeZone] of the container.  Timezone can also be set by mapping `/etc/localtime` between the host and the container. | `Etc/UTC` |
 |`APP_NICENESS`| Priority at which the application should run.  A niceness value of -20 is the highest priority and 19 is the lowest priority.  By default, niceness is not set, meaning that the default niceness of 0 is used.  **NOTE**: A negative niceness (priority increase) requires additional permissions.  In this case, the container should be run with the docker option `--cap-add=SYS_NICE`. | (unset) |
@@ -120,7 +113,7 @@ Environment variables can be set by adding one or more arguments `-e "<VAR>=<VAL
 |`ENABLE_CJK_FONT`| When set to `1`, open-source computer font `WenQuanYi Zen Hei` is installed.  This font contains a large range of Chinese/Japanese/Korean characters. | `0` |
 
 ## Config Directory
-Inside the container, wine's configuration and with it Backblaze's configuration is stored in the
+Inside the container, wine's configuration and with it ImgBurn's configuration is stored in the
 `/config/wine/` directory.
 
 This directory is also used to store the VNC password.  See the
@@ -141,24 +134,24 @@ container cannot be changed, but you are free to use any port on the host side.
 
 A minimum of 2 volumes need to be mounted to the container
 
-  * /config - This is where Wine and Backblaze will be installed
-  * Backup drives - these are the locations you wish to backup, any volume that is mounted as /drive_**driveletter** (from d up to z) will be mounted automatically for use in Backblaze with their equivalent letter, for example /drive_d will be mounted as D:
+  * /config - This is where Wine and ImgBurn will be installed
+  * Storage - these are the locations you wish to ImgButn to have access to, any volume that is mounted as /drive_**driveletter** (from d up to z) will be mounted automatically for use in ImgBurn with their equivalent letter, for example /drive_d will be mounted as D:
 
 You can mount drives with different paths, but these will need to be mounted manually within wine using the following method
 
-1. Add your storage path as a wine drive, so Backblaze can access it
+1. Add your storage path as a wine drive, so ImgBurn can access it
 
     ````shell
-    docker exec --user app backblaze_personal_backup ln -s /backup_volume/ /config/wine/dosdevices/d:
+    docker exec --user app imgburn-wine ln -s /backup_volume/ /config/wine/dosdevices/d:
     ````
 
-1. Restart the docker to get Backblaze to recognize the new drive
+2. Restart the docker to get Backblaze to recognize the new drive
 
     ````shell
-    docker restart backblaze_personal_backup
+    docker restart imgburn-wine
     ````
 
-1. Reload the Web Interface
+3. Reload the Web Interface
 
     ![Bildschirmfoto von 2022-01-16 14-49-45](https://user-images.githubusercontent.com/28999431/149662817-27f3c9e8-12ba-494c-898d-d9492541a5fb.png)
 
@@ -274,7 +267,7 @@ container.
 [OpenSSL Wiki]: https://wiki.openssl.org/index.php/Diffie_Hellman
 
 ## Installation:
-1. Check for yourself if using this docker complies with the Backblaze [terms of service](https://www.backblaze.com/company/terms.html)
+1. Check for yourself if using this docker complies with the ImgBurn [terms of service](https://www.imgburn.com/index.php?act=terms)
 1. Modify the following for your setup (in terms of [ports](#ports), [volumes](#volumes) and [environment variables](#environment-variables)) and run it
 
     **NOTE**: root priviliges may be needed
@@ -282,7 +275,7 @@ container.
     docker run \
         -p 8080:5800 \
         --init \
-        --name backblaze_personal_backup \
+        --name imgburn-wine \
         -v "[backup folder]/:/drive_d/" \
         -v "[config folder]/:/config/" \
         tessypowder/backblaze-personal-wine:latest
@@ -292,143 +285,37 @@ container.
 2. You may see wine being updated, this will take a couple of minutes
    
    ![image](https://github.com/xela1/backblaze-personal-wine-container/assets/357319/4f401b31-8d1d-40fe-85a3-ec4637c23bf5)
-
-1. The UI of the first step of the Backblaze installer is broken on wine, but it doesn't matter, just insert the email to your backblaze account into the input field
-
-    ![Bildschirmfoto von 2022-01-16 14-51-16](https://user-images.githubusercontent.com/28999431/149662881-b8527b31-e837-4982-91db-b0a3df6cc379.png)
-
-1. Press Enter
-
-    ![Bildschirmfoto von 2022-01-16 14-52-27](https://user-images.githubusercontent.com/28999431/149662922-b637e0e5-7932-4e5e-bf14-1e7a6678311c.png)
-
-1. Insert your password (important: keyboard locale mismatches can mess up your inputs)
-
-    - **TIP**: You can use the clipboard function of the web interface, but some passwords will still not get transferred correctly, i would reccommend setting your backblaze password to a long string without special characters
-
-    ![Bildschirmfoto von 2022-01-16 14-57-31](https://user-images.githubusercontent.com/28999431/149663068-80b17726-860a-4614-abc3-e1dba7b1674e.png)
-
-1. Press Enter
-
-    ![Bildschirmfoto von 2022-01-16 15-00-44](https://user-images.githubusercontent.com/28999431/149663220-625a74f7-f59c-40a4-83fc-992d039896b8.png)
-
-1. Wait for Backblaze to analyze your drives
-
-    ![Bildschirmfoto von 2022-01-16 15-00-49](https://user-images.githubusercontent.com/28999431/149663225-dc2f7209-2c57-4c3a-8f87-50750957cd69.png)
-
-1. Click Ok
-
-    ![Bildschirmfoto von 2022-01-16 15-01-00](https://user-images.githubusercontent.com/28999431/149663289-d53c7241-5856-4032-af41-66a3fa513b36.png)
-
-1. If your [config folder] is somewehere inside the [backup folder] on the docker host side (which is the case for the Unraid template) in order to prevent an infinite loop of config file uploads, because those uploads change bz_done* files in [config folder]/wine/drive_c/ProgramData/Backblaze/bzdata/bzbackup/bzdatacenter open the web interface, open the Backblaze settings, open the "Exclusions" tab, click on "Add Folder" and in the popup navigate to My Computer -> (D:) and naviagate to the config folder inside. For unraid template installs this is My Computer -> (D:) -> appdata -> backblaze_personal_backup. Click on OK and close the Backblaze Settings.
-
-1. The Installation is done 🎉
-
-1. Buy a license for your Computer in the Backblaze Dashboard, just like for a normal Windows/Mac installation
-
-## Troubleshooting
-
-- The Backblaze Installer says it recognized a server operating system
-
-  ![Bildschirmfoto von 2022-01-16 14-41-04](https://user-images.githubusercontent.com/28999431/149662713-b7b27862-59b6-432a-a3c3-327f939a7292.png)
-
-  - **Explanation**: I don't know what can cause this, it seems to randomly occur on some installations
-
-  - **Solution**: Stop the docker, delete the config directory, restart installation from beginning
-
-  - (**Speculation**: I think this only happens, when no volume is mounted at /config/ and docker manages the folder instead of the volume)
-
-- The backup folder mounted as drive D is not being backed up
-
-  - **Explanation**: Depending on when you added drive D to your wine configuration, the Backblaze installer might not recognize it
-
-  - **Solution**:
-    - Open the Backblaze settings
-    - In the section "Hard Drives" in the first tab "Settings" enable the checkbox for next to the drive D:\ 
-
-  - **Still not working**:
-    - Run
-      ````shell
-      docker exec --user app backblaze_personal_backup ls -la /config/wine/dosdevices/
-      ````
-
-    - The output should look like this:
-      ````
-        drwxr-xr-x 2 app app 4096 Jan 16 13:43 .
-        drwxr-xr-x 4 app app 4096 Jan 16 14:08 ..
-        lrwxrwxrwx 1 app app   10 Jan 16 13:43 c: -> ../drive_c
-        lrwxrwxrwx 1 app app   10 Jan 16 13:43 d: -> /drive_d/
-        lrwxrwxrwx 1 app app    1 Jan 16 13:43 z: -> /
-      ````
-
-     - If it doesn't confirm you've mounted the volume in the container correctly for automatic attachment or followed the manual instructions in [volumes](#volumes)
-	 
-- I can only see a black screen when I start the container
-
-  - **Explanation**: The Docker container may have insufficient permissions to download and install Backblaze.
-
-  - **Solution**:
-    - Try a different run command where you explicitly pass the root ID 0 to the container:
-
-    ````shell
-    docker run \
-        -p 8080:5800 \
-        --init \
-        --USER_ID=0 \
-        --GROUP_ID=0 \
-        --name backblaze_personal_backup \
-        -v "[backup folder]/:/drive_d/" \
-        -v "[config folder]/:/config/" \
-        tessypowder/backblaze-personal-wine:latest
-    ````
-
-  - **Additional 'black screen' troubleshooting for Synology devices**:
-    - It may be necessary to run the container with even higher permissions (--privileged)
-
-    ````shell
-    docker run \
-        -p 8080:5800 \
-        --init \
-        --privileged \
-        --USER_ID=0 \
-        --GROUP_ID=0 \
-        --name backblaze_personal_backup \
-        -v "[backup folder]/:/drive_d/" \
-        -v "[config folder]/:/config/" \
-        tessypowder/backblaze-personal-wine:latest
-    ````
-
-  - **For More Information**: See [#98](https://github.com/JonathanTreffler/backblaze-personal-wine-container/issues/98), [#99](https://github.com/JonathanTreffler/backblaze-personal-wine-container/issues/99)
+3. Follow the ImgBurn installer as you normally would, it is important that you do not change the install location!
+4. After install is complete ImgBurn should Automatically start.
+5. Use ImgBurn as usual.
   
 ## Additional Information
 
-1. Warning: The Backblaze client is not an init system (who knew) and doesn't clean up its zombie children. This will cause it to fill up your system's PID limit within a few hours which prevents new processes from being created system-wide, would not recommend.  
-The `--init` flag installs a tiny process that can actually do a few init things like wait()ing children in place of the backblaze client as PID 1.  
-2. Backblaze will create a `.bzvol` directory in the root of every hard drive it's configured to back up in which it'll store a full copy of files >100M split into 10M parts. Mount accordingly if you want to preserve SSD erase cycles.
-3. You can browse the files accessible to Backblaze using:
+1. You can browse the files accessible to ImgBurn using:
     ````shell
-    docker exec --user app backblaze_personal_backup wine explorer
+    docker exec --user app imgburn-wine wine explorer
     ````
-4. You can open the Wine Config using:
+2. You can open the Wine Config using:
     ````shell
-    docker exec --user app backblaze_personal_backup winecfg
+    docker exec --user app imgburn-wine winecfg
     ````
-5. We are using Wine's virtual desktop mode as default and are using a default screen resoluzion of 900x700 pixels. It's larger than the Backblaze UI window itself to make room for the Backblaze restore app. You can always modify the resolution as you like with DISPLAY_WIDTH and DISPLAY_HEIGHT:
+3. We are using Wine's virtual desktop mode as default and are using a default screen resoluzion of 900x700 pixels. It's larger than the ImgBUrn's UI. You can always modify the resolution as you like with DISPLAY_WIDTH and DISPLAY_HEIGHT:
     ````shell
     docker run ... -e "DISPLAY_WIDTH=1280" -e "DISPLAY_HEIGHT=800" ...
     ````
 
 # Credits
-This was originally developed by @Atemu (https://github.com/Atemu/backblaze-personal-wine-container).
+This was originally developed by @JonathanTreffler (https://github.com/JonathanTreffler/backblaze-personal-wine-container).
 
-The Backblaze name, logo and application is the property of Backblaze, Inc.
+The ImgBurn name, logo and application is the property of ImgBurn.
 
-This docker does not redistribute the Backblaze application. It gets downloaded from the official Backblaze Servers or Internet Archive during the install process.
+This docker does not redistribute the ImgBUrn application. It gets downloaded from the official ImgBUrn Servers.
 
 This docker image is based on @jlesage 's excellent [base image](https://github.com/jlesage/docker-baseimage-gui).
 
 ## Contributors:
 This project was made by:
 
-<a href="https://github.com/JonathanTreffler/backblaze-personal-wine-container/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=JonathanTreffler/backblaze-personal-wine-container" />
+<a href="https://github.com/JWolvers/imgburn-wine-container/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=JWolvers/imgburn-wine-container" />
 </a>
